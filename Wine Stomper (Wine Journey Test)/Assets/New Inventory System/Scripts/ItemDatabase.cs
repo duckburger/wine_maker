@@ -12,7 +12,10 @@ public class ItemDatabase : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		if (Instance != null && Instance != this) { // Make sure that there is only one instance of this database (singleton pattern)
+		if (Instance != null && Instance != this)
+		{
+			// Make sure that there is only one instance of this database (singleton pattern)
+
 			Destroy(gameObject);
 		} else
 		{

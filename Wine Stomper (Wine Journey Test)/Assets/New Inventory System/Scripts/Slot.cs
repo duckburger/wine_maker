@@ -29,7 +29,7 @@ public class Slot : MonoBehaviour,  IDropHandler{ // This interface is required 
 			inventory.inventoryItems[myID] = droppedItem.item; // Add the item you dropped into the curren slot in the inventory
 			droppedItem.currentSlot = myID; // Let the dropped item know that its slot has changed
 
-		} else // If there is an item in the slot already...
+		} else if (droppedItem.currentSlot != myID) // If there is an item in the slot already...
 		{
 			Transform itemInThisSlot = this.transform.GetChild(0); // Grab the item that is in this slot
 

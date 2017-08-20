@@ -21,7 +21,7 @@ public class Item  {
 	}
 
 
-	[Newtonsoft.Json.JsonConstructor] // This has to be above the constructor of the item we are tryong to build from a JSON array
+	[Newtonsoft.Json.JsonConstructor]				// This has to be above the constructor of the item we are tryong to build from a JSON array
 	public Item (int ID, string slug, string name, string description, bool stackable)
 	{
 		itemID = ID;

@@ -1,2 +1,2 @@
 # wine_maker
-A test for the wine maker game.
+My game about making wine. It starts with a sad premise, which drives your will to succeed throughout.

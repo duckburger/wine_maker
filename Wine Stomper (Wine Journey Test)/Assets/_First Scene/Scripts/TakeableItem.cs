@@ -7,7 +7,7 @@ public class TakeableItem : MonoBehaviour {
 
 	public int myItemID;
 
-	public Inventory inventory;
+	//public Inventory inventory;
 
 	// Use this for initialization
 	void Start () {
@@ -16,7 +16,7 @@ public class TakeableItem : MonoBehaviour {
 		
 	}
 
-	private void OnTriggerStay2D(Collider2D collider)
+	/*private void OnTriggerStay2D(Collider2D collider)
 	{
 
 		if (collider.gameObject.tag == "Player")
@@ -27,7 +27,7 @@ public class TakeableItem : MonoBehaviour {
 					Destroy(gameObject);
 			}
 		}
-	}
+	}*/
 
 	// Update is called once per frame
 	void Update () {

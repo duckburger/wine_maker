@@ -48,6 +48,7 @@ public class ItemData : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDr
 
 	public void OnEndDrag(PointerEventData eventData) // (Fires before OnDrop) When we stop dragging...
 	{
+		
 		this.transform.SetParent(inventory.slots[currentSlot].transform); // When we stop dragging set the item's parent back to its slot
 		this.transform.position = inventory.slots[currentSlot].transform.position; // Reset its position as well
 		this.GetComponent<CanvasGroup>().blocksRaycasts = true; // Allow it to receive raycasts again

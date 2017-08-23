@@ -14,7 +14,7 @@ public class Tooltip : MonoBehaviour {
 	{
 		tooltip = GameObject.Find("Tooltip");
 
-		print("I am here");
+		
 		tooltip.SetActive(false);
 	}
 

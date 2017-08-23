@@ -18,6 +18,6 @@ public class Camera : MonoBehaviour {
 
 	private void LateUpdate()
 	{
-		transform.position = new Vector3(target.transform.localPosition.x, target.transform.localPosition.y + 0.25f, -10f);
+		transform.position = new Vector3(target.transform.localPosition.x, target.transform.localPosition.y, -10f);
 	}
 }

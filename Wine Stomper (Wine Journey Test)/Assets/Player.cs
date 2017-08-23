@@ -39,8 +39,6 @@ public class Player : MonoBehaviour {
 
 			}
 
-
-
 		} else
 		{
 			myRigidBody.velocity = Vector2.zero;

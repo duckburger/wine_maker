@@ -1,2 +1,2 @@
 # wine_maker (Work in progress)
-My game about making wine. It starts with a sad premise, which drives your will to succeed throughout.
+My game about making wine. Grow grapes and make them into wine, while growing your winery.

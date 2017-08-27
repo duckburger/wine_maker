@@ -186,7 +186,7 @@ public class CameraUIManager : MonoBehaviour {
 		if (hit.collider != null)
 		{
 
-			print("The raycast hit " + hit.collider.gameObject);
+			//print("The raycast hit " + hit.collider.gameObject);
 			if (hit.collider.gameObject.tag == "Building")
 			{
 

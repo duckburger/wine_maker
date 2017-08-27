@@ -22,7 +22,7 @@ public class ItemData : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDr
 
 	}
 
-	public void OnPointerDown(PointerEventData eventData)  // When we click the mouse over this item....
+	public void OnPointerDown(PointerEventData eventData)  // When we click the on this item....
 	{
 		if (item != null) // If it is not empty
 		{

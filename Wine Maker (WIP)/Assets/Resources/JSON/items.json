@@ -66,7 +66,8 @@
 		"name" : "Full Wine Bottle",
 		"description" : "A bottle full of wine. All that's left is to give this vintage a name and label it.",
 		"itemStackable" : "true"
-	}
+	},
+	
 	
 ]
 

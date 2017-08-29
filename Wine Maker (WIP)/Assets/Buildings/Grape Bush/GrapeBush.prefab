@@ -74,15 +74,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1684049095950344
+--- !u!1 &1652497718631548
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4946500103327788}
-  - component: {fileID: 212998608196531220}
+  - component: {fileID: 4907003082737644}
+  - component: {fileID: 212605833354861470}
   m_Layer: 0
   m_Name: grape_bunch
   m_TagString: Untagged
@@ -163,7 +163,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.604, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4946500103327788}
+  - {fileID: 4907003082737644}
   - {fileID: 4728766439333710}
   - {fileID: 4717332949467440}
   - {fileID: 4673256341755610}
@@ -225,12 +225,12 @@ Transform:
   m_Father: {fileID: 4494835158869104}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4946500103327788
+--- !u!4 &4907003082737644
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1684049095950344}
+  m_GameObject: {fileID: 1652497718631548}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.13, y: -0.018, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -313,7 +313,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasInterior: 0
   grapes: []
+  timeToRegenerate: 5
+  myTimer: 0
+  grapeBunch: {fileID: 0}
   isBeingUsed: 0
+  isPickedClean: 0
 --- !u!114 &114669210633823632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -493,12 +497,12 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!212 &212624672727515236
+--- !u!212 &212605833354861470
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1385369535965766}
+  m_GameObject: {fileID: 1652497718631548}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -535,12 +539,12 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!212 &212998608196531220
+--- !u!212 &212624672727515236
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1684049095950344}
+  m_GameObject: {fileID: 1385369535965766}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0

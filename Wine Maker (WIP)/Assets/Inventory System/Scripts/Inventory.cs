@@ -43,7 +43,7 @@ public class Inventory : MonoBehaviour {
 
 		AddItem("full_clay_jar", 1);
 		AddItem("empty_grape_basket", 1);
-
+		AddItem("empty_grape_basket", 1);
 
 
 
@@ -63,7 +63,7 @@ public class Inventory : MonoBehaviour {
 		return false;
 	}
 
-	public void AddItem(string slug, int amountOfItem) // Method that adds items by slug and amount to add
+	public Item AddItem(string slug, int amountOfItem) // Method that adds items by slug and amount to add
 	{
 		Item itemToAdd = itemDatabase.GetItem(slug); // Grabbing the item we want to add from the database
 
@@ -90,7 +90,7 @@ public class Inventory : MonoBehaviour {
 
 					invObj.name = itemToAdd.itemName; // Change the prefab's name to that of the item it will represent
 
-					return;
+					return inventoryItems[i];
 				}
 			}
 		}
@@ -118,7 +118,7 @@ public class Inventory : MonoBehaviour {
 				invObj.GetComponentInChildren<Text>().text = invObj.GetComponent<ItemData>().amount.ToString(); // Write the amount of item in the bottom right corner
 
 				invObj.name = itemToAdd.itemName; // Change the prefab's name to that of the item it will represent
-				break;
+				return inventoryItems[i];
 			}
 			else if ((inventoryItems[i].itemSlug == itemToAdd.itemSlug && itemToAdd.itemStackable && amountOfItem >= 20))
 			{
@@ -130,7 +130,7 @@ public class Inventory : MonoBehaviour {
 
 				AddRemainingAmountOfItem(itemToAdd, remainingAmount);
 
-				break;
+				return inventoryItems[i];
 			}
 			else if ((inventoryItems[i].itemSlug == itemToAdd.itemSlug && itemToAdd.itemStackable && (slots[i].transform.GetChild(0).GetComponent<ItemData>().amount + amountOfItem) >= 20f))
 			{
@@ -145,7 +145,7 @@ public class Inventory : MonoBehaviour {
 
 				AddRemainingAmountOfItem(itemToAdd, remainingAmount);
 
-				break;
+				return inventoryItems[i];
 			}
 			else if (inventoryItems[i].itemSlug == itemToAdd.itemSlug && itemToAdd.itemStackable && amountOfItem > 0) // Add the amount of this item to an already existing stack
 			{
@@ -155,13 +155,15 @@ public class Inventory : MonoBehaviour {
 				slots[i].GetComponentInChildren<ItemData>().amount += amountOfItem; // Add the passed amount to the slot with the same item
 				slots[i].GetComponentInChildren<Text>().text = slots[i].GetComponentInChildren<ItemData>().amount.ToString(); // Write the new amount of item out
 
-				break;
+				return inventoryItems[i];
 
 			}
 			
 
 
 		}
+		return null;
+
 	}
 	 
 

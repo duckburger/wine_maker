@@ -4,25 +4,35 @@ using UnityEngine;
 
 public class SortingTable : BuildingActions {
 
-	[SerializeField] bool isBeingUsed;
+	public bool isBeingUsed;
 
 
 	private PlayerMovement player;
 	private SortingMinigame sortingMiniGameController;
+	private CameraUIManager cameraUIManager;
+	private Inventory inventory;
 
 	private void Start()
 	{
+		cameraUIManager = FindObjectOfType<CameraUIManager>();
 		player = FindObjectOfType<PlayerMovement>();
 		sortingMiniGameController = FindObjectOfType<SortingMinigame>();
+		inventory = FindObjectOfType<Inventory>();
 	}
 
 
 	public override void HandleInteractions()
 	{
-		if (!isBeingUsed)
+		if (!isBeingUsed && inventory.CheckForItemInInventory("full_grape_basket_u") == true);
 		{
-			isBeingUsed = !isBeingUsed;
+			
 			sortingMiniGameController.StartTheSortingMiniGame();
+			Destroy(cameraUIManager.currentlyVisibleMenu);
+			cameraUIManager.menuSpawned = false;
 		}
+		Debug.Log ("Cannot use " + this + " at this moment");
+
+
+
 	}
 }

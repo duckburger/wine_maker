@@ -11,7 +11,9 @@ public class SortingMinigame : MonoBehaviour {
 	[SerializeField] float playTimer;
 	[SerializeField] bool isPlaying = false;
 	private Animator animator;
-
+	private Inventory inventory;
+	private PlayerMovement player;
+	private SortingTable sortingTable;
 
 	public float qsForThisStage;
 	public List<GrapeButton> grapeButtons = new List<GrapeButton>();
@@ -28,12 +30,14 @@ public class SortingMinigame : MonoBehaviour {
 
 	private void Start()
 	{
+		sortingTable = FindObjectOfType<SortingTable>();
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
 		animator = GetComponent<Animator>();
 		playTimer = timeLeftToPlay;
 		sortingSlider = GameObject.Find("SortingTimer").GetComponent<Slider>();
 		sortingSlider.maxValue = timeLeftToPlay;
 		sortingSlider.value = playTimer;
-
+		inventory = FindObjectOfType<Inventory>();
 		
 
 	}
@@ -50,7 +54,7 @@ public class SortingMinigame : MonoBehaviour {
 
 		qsForThisStage = (25.0f / 100.0f)*totalValForThisStage;
 
-		animator.SetTrigger("isAppearing");
+		
 
 
 
@@ -61,28 +65,56 @@ public class SortingMinigame : MonoBehaviour {
 	public void StartTheSortingMiniGame()
 	{
 
-		animator.SetTrigger("isAppearing");
-		if (!isPlaying)
+		if (inventory.CheckForItemInInventory("full_grape_basket_u"))
 		{
-			isPlaying = true;
-			PopulateTheField();
-			
+			sortingTable.isBeingUsed = !sortingTable.isBeingUsed;
 
+			animator.SetTrigger("isAppearing");
+			if (!isPlaying)
+			{
+				isPlaying = true;
+				inventory.RemoveItem("full_grape_basket_u", 1);
+				PopulateTheField();
+				sortingTable.isBeingUsed = false;
+
+			}
+
+
+			Debug.Log("The game has already started");
 		}
 
-
-		Debug.Log("The game has already started");
+		Debug.Log("You don't have a basket of unsorted grapes to sort!");
+		
 
 
 	}
 
-	
+	public void StopTheSortingMiniGame()
+	{
+		animator.SetTrigger("isAppearing");
+		CalculateTheFinalQSForThisStage(badGrapesRemoved, goodGrapesRemoved);
+		Item basketOfSortedGrapes = inventory.AddItem("full_grape_basket_s", 1);
+		basketOfSortedGrapes.itemQualityScore += qsForThisStage;
+		print("The quality score of the bottle you started creating is " + qsForThisStage + " so far");
+		player.isUsingSomething = false;
+		sortingTable.isBeingUsed = false;
+
+	}
+
+
 
 
 
 
 	void PopulateTheField ()
 	{
+		player.isUsingSomething = true;
+		grapeButtons = new List<GrapeButton>();
+		GoodOrBadButton[] oldButtons = grapePanel.GetComponentsInChildren<GoodOrBadButton>();
+		for (int j = 0; j < oldButtons.Length; j++)
+		{
+			Destroy(oldButtons[j].gameObject);
+		}
 		for (int i = 0; i < buttonAmount; i++)
 		{ 
 			GrapeButton newGrapeButton = new GrapeButton(); 
@@ -103,12 +135,14 @@ public class SortingMinigame : MonoBehaviour {
 			playTimer -= Time.deltaTime;
 			sortingSlider.value = playTimer;
 
-		}
+
+		} 
 
 		if (playTimer <= 0)
 		{
 			isPlaying = false;
-			
+			StopTheSortingMiniGame();
+			playTimer = timeLeftToPlay;
 		}
 
 		

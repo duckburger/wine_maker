@@ -9,6 +9,7 @@ public class CameraUIManager : MonoBehaviour {
 	public float fadeSpeed;
 	public bool sceneEnding;
 	public bool sceneStarting = true;
+	public GameObject currentlyVisibleMenu;
 
 	[SerializeField] GameObject inventoryPanel;
 	[SerializeField] bool isInventoryOpen = false;
@@ -31,7 +32,7 @@ public class CameraUIManager : MonoBehaviour {
 	private GameObject player;
 	private GameManager gameManager;
 	private InventoryManager inventoryManager;
-	private GameObject currentlyVisibleMenu;
+	
 	private GameObject lastSelectedBuilding;
 	private Shader oldShader;
 
@@ -182,8 +183,20 @@ public class CameraUIManager : MonoBehaviour {
 
 		
 			RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+		
+		if (!hit)
+		{
+			if (menuSpawned)
+			{
+				Destroy(currentlyVisibleMenu);
+				currentlyVisibleMenu = null;
 
-		if (hit.collider != null)
+				menuSpawned = false;
+				return;
+			}
+		}
+
+		if (hit.collider.gameObject != null)
 		{
 
 			//print("The raycast hit " + hit.collider.gameObject);
@@ -254,8 +267,9 @@ public class CameraUIManager : MonoBehaviour {
 			}
 
 		}
-					
-			}
+
+
+	}
 
 
 

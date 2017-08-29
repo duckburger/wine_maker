@@ -11,6 +11,7 @@ public class Item  {
 	public string itemDescription;
 	public bool itemStackable;
 	public Sprite itemIcon;
+	public float itemQualityScore;
 
 
 
@@ -30,6 +31,7 @@ public class Item  {
 		itemDescription = description;
 		itemStackable = stackable;
 		itemIcon = Resources.Load<Sprite>("Item Icons/" + name);
+		itemQualityScore = 0;
 	}
 
 	public Item ()

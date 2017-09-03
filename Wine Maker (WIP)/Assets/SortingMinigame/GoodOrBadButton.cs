@@ -11,6 +11,7 @@ public class GoodOrBadButton : MonoBehaviour, IPointerDownHandler {
 	public int changeOfQSValue;
 
 	private SortingMinigame sortingMiniGameController;
+	
 
 
 

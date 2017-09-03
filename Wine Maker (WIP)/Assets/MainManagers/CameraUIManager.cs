@@ -194,10 +194,9 @@ public class CameraUIManager : MonoBehaviour {
 				menuSpawned = false;
 				return;
 			}
-		}
+		} else { 
 
-		if (hit.collider.gameObject != null)
-		{
+		
 
 			//print("The raycast hit " + hit.collider.gameObject);
 			if (hit.collider.gameObject.tag == "Building")

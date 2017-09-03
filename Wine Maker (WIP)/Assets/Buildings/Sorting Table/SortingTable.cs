@@ -23,7 +23,7 @@ public class SortingTable : BuildingActions {
 
 	public override void HandleInteractions()
 	{
-		if (!isBeingUsed && inventory.CheckForItemInInventory("full_grape_basket_u") == true);
+		if (!isBeingUsed && inventory.CheckForItemInInventory("full_grape_basket_u") == true)
 		{
 			
 			sortingMiniGameController.StartTheSortingMiniGame();

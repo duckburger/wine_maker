@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour {
 
 	ItemDatabase itemDatabase;
-	GameObject inventoryPanel; // Reference to the UI element
+	public GameObject inventoryPanel; // Reference to the UI element
 	GameObject slotPanel; // Reference to the UI element
 	public GameObject inventorySlot; // Reference to the prefab of a slot (with a background)
 	public GameObject inventoryItem; // Reference to the prefab of an item (an GO with an image on it)
@@ -26,7 +26,7 @@ public class Inventory : MonoBehaviour {
 
 		slotAmount = 8;
 
-		inventoryPanel = GameObject.Find("Inventory Panel");
+		
 		slotPanel = inventoryPanel.transform.Find("Slot Panel").gameObject;
 
 		for (int i = 0; i < slotAmount; i++)  // Fill the inventory with EMPTY items and fill the slots with slot prefabs. Set slots' parent to the slot panel and assign each slot's ID. Resize each slot to 1 1 1
@@ -41,10 +41,9 @@ public class Inventory : MonoBehaviour {
 		}
 
 
-		AddItem("full_clay_jar", 1);
+		
 		AddItem("empty_grape_basket", 1);
-		AddItem("empty_grape_basket", 1);
-
+		AddItem("full_grape_basket_s", 1);
 
 
 	}
@@ -107,7 +106,7 @@ public class Inventory : MonoBehaviour {
 				invObj.transform.SetParent(slots[i].transform);   // Parent the item prefab to the current slot
 				invObj.transform.localPosition = new Vector3(0, 0, 0);  // Center the prefab
 				
-				Debug.Log("Added the " + itemToAdd.itemName + " to the inventory");
+				//Debug.Log("Added the " + itemToAdd.itemName + " to the inventory");
 				invObj.transform.localScale = new Vector3(1, 1, 1);  // Normalize its size
 				invObj.GetComponent<Image>().sprite = itemToAdd.itemIcon;  // Change its image to one of the added item
 

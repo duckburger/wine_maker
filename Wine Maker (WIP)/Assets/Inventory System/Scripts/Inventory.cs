@@ -12,6 +12,8 @@ public class Inventory : MonoBehaviour {
 	public GameObject inventorySlot; // Reference to the prefab of a slot (with a background)
 	public GameObject inventoryItem; // Reference to the prefab of an item (an GO with an image on it)
 	public GameObject lastAddedItem = null;
+	public GameObject lastRemovedItem = null;
+
 
 	public List<Item> inventoryItems = new List<Item>(); // A lits of all items in inventory
 	public List<GameObject> slots = new List<GameObject>(); // A list of all slots in inventory
@@ -43,8 +45,8 @@ public class Inventory : MonoBehaviour {
 
 		
 		AddItem("empty_grape_basket", 1);
-		//AddItem("full_grape_basket_s", 1);
-		//AddItem("full_grape_basket_s", 1);
+		AddItem("full_grape_basket_s", 1);
+		AddItem("full_grape_basket_s", 1);
 
 	}
 
@@ -241,7 +243,9 @@ public class Inventory : MonoBehaviour {
 				}
 				else if (slots[i].transform.GetChild(0).GetComponent<ItemData>().amount == amountToRemove)
 				{
+					lastRemovedItem = slots[i].gameObject.GetComponentInChildren<ItemData>().gameObject;
 					inventoryItems[i] = new Item();
+					
 					Destroy(slots[i].transform.GetChild(0).gameObject);
 					return;
 				}
@@ -249,6 +253,8 @@ public class Inventory : MonoBehaviour {
 			else if (inventoryItems[i].itemSlug == itemToRemove.itemSlug)
 			{
 				print("Removed a non-stackable item");
+				lastRemovedItem = slots[i].gameObject.GetComponentInChildren<ItemData>().gameObject;
+
 				inventoryItems[i] = new Item();
 				Destroy(slots[i].transform.GetChild(0).gameObject);
 				

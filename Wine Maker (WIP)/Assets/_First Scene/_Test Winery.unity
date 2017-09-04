@@ -108,28 +108,6 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &114158021 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1012642811365670, guid: 211c72f9b27fe484899da5a88dc974af,
-    type: 2}
-  m_PrefabInternal: {fileID: 876080679}
---- !u!95 &114158025
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 114158021}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a451d11c7aef7c14c827fa52e9c35af9, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &216538683
 Prefab:
   m_ObjectHideFlags: 0
@@ -419,7 +397,7 @@ Prefab:
     - target: {fileID: 224725678905050456, guid: 947fe36c42759eb4eb9bf1137418efa0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 287.09
+      value: 1525.1
       objectReference: {fileID: 0}
     - target: {fileID: 224725678905050456, guid: 947fe36c42759eb4eb9bf1137418efa0,
         type: 2}
@@ -429,7 +407,7 @@ Prefab:
     - target: {fileID: 224725678905050456, guid: 947fe36c42759eb4eb9bf1137418efa0,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: -987.69
+      value: -961.88
       objectReference: {fileID: 0}
     - target: {fileID: 224725678905050456, guid: 947fe36c42759eb4eb9bf1137418efa0,
         type: 2}
@@ -460,6 +438,16 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224315750723303906, guid: 947fe36c42759eb4eb9bf1137418efa0,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224315750723303906, guid: 947fe36c42759eb4eb9bf1137418efa0,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 947fe36c42759eb4eb9bf1137418efa0, type: 2}
@@ -661,11 +649,6 @@ Prefab:
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114303629692845046, guid: 211c72f9b27fe484899da5a88dc974af,
-        type: 2}
-      propertyPath: timeLeftToPlay
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 211c72f9b27fe484899da5a88dc974af, type: 2}

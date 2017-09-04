@@ -23,6 +23,7 @@ public class SortingMinigame : MonoBehaviour {
 	public Sprite badGrape;
 	public Transform grapePanel;
 	public GameObject grapeButton;
+	public GameObject sortingSliderGO;
 	public Slider sortingSlider;
 
 
@@ -34,7 +35,7 @@ public class SortingMinigame : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
 		animator = GetComponent<Animator>();
 		playTimer = timeLeftToPlay;
-		sortingSlider = GameObject.Find("SortingTimer").GetComponent<Slider>();
+		sortingSlider = sortingSliderGO.GetComponent<Slider>();
 		sortingSlider.maxValue = timeLeftToPlay;
 		sortingSlider.value = playTimer;
 		inventory = FindObjectOfType<Inventory>();
@@ -91,6 +92,7 @@ public class SortingMinigame : MonoBehaviour {
 
 	public void StopTheSortingMiniGame()
 	{
+
 		animator.SetTrigger("isAppearing");
 		CalculateTheFinalQSForThisStage(badGrapesRemoved, goodGrapesRemoved);
 		inventory.AddItem("full_grape_basket_s", 1);
@@ -100,6 +102,10 @@ public class SortingMinigame : MonoBehaviour {
 		print("The quality score of the bottle you started creating is " + qsForThisStage + " so far");
 		player.isUsingSomething = false;
 		sortingTable.isBeingUsed = false;
+		qsForThisStage = 0;
+		goodGrapesRemoved = 0;
+		badGrapesRemoved = 0;
+
 
 	}
 

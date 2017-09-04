@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WineBucket : BuildingActions, IBottleproducer {
+public class WineBucket : BuildingActions {
 
 
 	public bool isEmpty;
+	public SpriteRenderer mySpriteRender;
+	public float qSToRemember;
+	public bool isBeingUsed = false;
+
 
 	[SerializeField] Transform stompArea;
-	[SerializeField] ParticleSystem effector;
-	[SerializeField] float stompTimer;
-	[SerializeField] bool isBeingUsed = false;
 	[SerializeField] Sprite emptyStateImage;
 	[SerializeField] Sprite fullStateImage;
-	[SerializeField] float qSToRemember;
 
 
 	private float stompTimerMemory;
@@ -21,17 +21,18 @@ public class WineBucket : BuildingActions, IBottleproducer {
 	private Vector2 playerLastPos;
 	private InventoryManager inventoryManager;
 	private Inventory inventory;
-	private SpriteRenderer mySpriteRender;
 	private StompingMinigame stompingMinigameController;
+	private CameraUIManager cameraUIManager;
 	
 
 
 
 	// Use this for initialization
 	void Start () {
+
+		cameraUIManager = FindObjectOfType<CameraUIManager>();
 		stompingMinigameController = FindObjectOfType<StompingMinigame>();
 		inventory = FindObjectOfType<Inventory>();
-		stompTimerMemory = stompTimer;
 		player = GameObject.FindGameObjectWithTag("Player");
 		inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
 		isEmpty = true;
@@ -48,23 +49,22 @@ public class WineBucket : BuildingActions, IBottleproducer {
 
 			if (!isBeingUsed && isEmpty)
 			{
+
+				stompingMinigameController.wineBucket = this.gameObject;
 				if (inventory.CheckForItemInInventory("full_grape_basket_s"))
 				{
-					/*for (int j = 0; j < inventory.inventoryItems.Count; j++) {
-						if (inventory.inventoryItems[j].itemSlug == "full_grape_basket_s")
-						{
-							stompingMinigameController.qsForThisStage = inventory.slots[j].GetComponentInChildren<ItemData>().myBottleInProgress.qualityScore;
-							break;
-						}
-					}*/
-					mySpriteRender.sprite = fullStateImage;
-					inventory.RemoveItem("full_grape_basket_s", 1);
 
-					qSToRemember = inventory.lastAddedItem.GetComponent<ItemData>().myBottleInProgress.qualityScore;
+
+					inventory.RemoveItem("full_grape_basket_s", 1);
+					qSToRemember = inventory.lastRemovedItem.GetComponent<ItemData>().myBottleInProgress.qualityScore;
+
+
 
 					inventory.AddItem("empty_grape_basket", 1);
 
 					inventory.lastAddedItem.GetComponent<ItemData>().myBottleInProgress.qualityScore = qSToRemember;
+
+					mySpriteRender.sprite = fullStateImage; 
 
 					isEmpty = false;
 					return;
@@ -73,20 +73,20 @@ public class WineBucket : BuildingActions, IBottleproducer {
 
 			if (!isBeingUsed && !isEmpty)
 			{
-				stompingMinigameController.StartTheStompingMiniGame();
-				stompTimer = stompTimerMemory;
+				Destroy(cameraUIManager.currentlyVisibleMenu);
+				cameraUIManager.menuSpawned = false; //Turns off the context menu
+
+				stompingMinigameController.StartTheStompingMiniGame(); // Start the mini game from inside the respective controller
 				isBeingUsed = true;
-				playerLastPos = player.transform.position;
 				player.transform.position = stompArea.transform.position;
 				print("Moved the player to " + stompArea);
 				player.GetComponent<PlayerMovement>().isUsingSomething = true;
 				player.GetComponent<PlayerMovement>().myAnimator.SetTrigger("stompingTrigger");
-				effector.Play();
+				
 				
 
 			}
 		}
-
 		Debug.Log("Not close enough to interact with this building!");
 		
 	}
@@ -97,36 +97,12 @@ public class WineBucket : BuildingActions, IBottleproducer {
 		
 	
 
-	public void ProduceBottles(int producedBottles)
-	{
-		inventoryManager.CurrentBottles += producedBottles;
-
-	}
+	
 
 	// Update is called once per frame
 	void Update () {
 
-		stompTimer -= Time.deltaTime;
-
-		if (stompTimer <= 0 && isBeingUsed)
-		{
-			isBeingUsed = false;
-			player.GetComponent<PlayerMovement>().myAnimator.SetTrigger("playerIdle");
-			player.GetComponent<PlayerMovement>().isUsingSomething = false;
-
-			effector.Stop();
-			stompTimer = stompTimerMemory;
-			mySpriteRender.sprite = emptyStateImage;
-			isEmpty = true;
-			Item itemToAdd = inventory.AddItem("full_clay_jar", 1);
-
-			inventory.lastAddedItem.GetComponent<ItemData>().myBottleInProgress.qualityScore = qSToRemember + stompingMinigameController.qsForThisStage;
-
-			stompingMinigameController.StopTheStompingMiniGame();
-			player.transform.position = playerLastPos;
-
-			
-		}
+		
 
 
 	}

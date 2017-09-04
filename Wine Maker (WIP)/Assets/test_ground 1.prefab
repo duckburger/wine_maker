@@ -1669,10 +1669,11 @@ MonoBehaviour:
   isEmpty: 0
   stompArea: {fileID: 4772388796394836}
   effector: {fileID: 198933496607150984}
-  stompTimer: 5
+  stompTimer: 10
   isBeingUsed: 0
   emptyStateImage: {fileID: 21300000, guid: f3a4b4542d1d5c14ba92f7c1b6aa8c44, type: 3}
   fullStateImage: {fileID: 21300000, guid: 6cfb2f89ce545ed49b1df0dcf3e5c47f, type: 3}
+  qSToRemember: 0
 --- !u!114 &114223039964427352
 MonoBehaviour:
   m_ObjectHideFlags: 1

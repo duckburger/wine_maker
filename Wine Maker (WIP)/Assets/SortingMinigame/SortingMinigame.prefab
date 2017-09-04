@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222331439405087480}
   - component: {fileID: 114023465497677540}
   - component: {fileID: 114303629692845046}
+  - component: {fileID: 95456419421150214}
   m_Layer: 5
   m_Name: SortingMinigame
   m_TagString: Untagged
@@ -161,6 +162,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &95456419421150214
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1012642811365670}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a451d11c7aef7c14c827fa52e9c35af9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114023465497677540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -259,11 +277,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e51c7c8dc3b65347bf3011fdeb365d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeLeftToPlay: 10
+  playTimer: 0
+  isPlaying: 0
+  qsForThisStage: 0
+  badGrapesRemoved: 0
+  goodGrapesRemoved: 0
   goodGrape: {fileID: 21300000, guid: bf931ca2652aeff48ac7a0152aaa9a0e, type: 3}
   badGrape: {fileID: 21300000, guid: b32922ba76653a541b17a430f59f8e12, type: 3}
   grapePanel: {fileID: 224419728340892848}
   grapeButton: {fileID: 1361345190875892, guid: c10ba29a8528c9e4786c19c09f4f959d,
     type: 2}
+  sortingSliderGO: {fileID: 1906929739375326}
+  sortingSlider: {fileID: 0}
 --- !u!114 &114364471818141696
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -9,6 +9,7 @@ public class ItemData : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDr
 	public Item item;  // Set so the item knows which one it is
 	public int amount; // Set so the item knows how many of itself there is in the inventory
 	public int currentSlot; // Set so the item knows which inventory slot it's in
+	public BottleInfo myBottleInProgress;
 
 	private Tooltip tooltip;
 	
@@ -65,6 +66,19 @@ public class ItemData : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDr
 	}
 
 	
+}
+
+[System.Serializable]
+public class BottleInfo
+{
+	public float age;
+	public float qualityScore;
+
+
+	public BottleInfo()
+	{
+
+	}
 }
 
 

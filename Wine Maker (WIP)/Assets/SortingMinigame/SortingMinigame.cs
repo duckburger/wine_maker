@@ -93,8 +93,10 @@ public class SortingMinigame : MonoBehaviour {
 	{
 		animator.SetTrigger("isAppearing");
 		CalculateTheFinalQSForThisStage(badGrapesRemoved, goodGrapesRemoved);
-		Item basketOfSortedGrapes = inventory.AddItem("full_grape_basket_s", 1);
-		basketOfSortedGrapes.itemQualityScore += qsForThisStage;
+		inventory.AddItem("full_grape_basket_s", 1);
+
+		inventory.lastAddedItem.GetComponent<ItemData>().myBottleInProgress.qualityScore += qsForThisStage;
+
 		print("The quality score of the bottle you started creating is " + qsForThisStage + " so far");
 		player.isUsingSomething = false;
 		sortingTable.isBeingUsed = false;

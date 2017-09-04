@@ -138,7 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 2
   jumpStrength: 2
-  minJumpDistanceFromGround: 0.3
+  minJumpDistanceFromGround: 0.2
   isUsingSomething: 0
   myAnimator: {fileID: 0}
   layerMask:

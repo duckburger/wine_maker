@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,7 @@ public class StompingMinigame : MonoBehaviour {
 	[SerializeField] List<GameObject> listOfArrows = new List<GameObject>();
 	[SerializeField] List<StompingButton> listOfButtons = new List<StompingButton>();
 
+	[SerializeField] bool hasPlayedOnce = false;
 	private int amountOfButtonsToDisplay = 4;
 	private PlayerMovement player;
 
@@ -30,12 +32,44 @@ public class StompingMinigame : MonoBehaviour {
 		
 	}
 
-	void StartTheStompingMiniGame()
+	public void StartTheStompingMiniGame()
 	{
 		isPlaying = true;
 		player.isUsingSomething = true;
-		GenerateANewButtonList();
-		StartCoroutine(ChooseArrowToPress());
+		if (!hasPlayedOnce)
+		{
+			GenerateANewButtonList();
+			hasPlayedOnce = true;
+			StartCoroutine(ChooseArrowToPress());
+		} else if (hasPlayedOnce)
+		{
+
+			ActivateStompingButtons();
+			StartCoroutine(ChooseArrowToPress());
+
+		}
+
+
+	}
+
+	private void ActivateStompingButtons()
+	{
+		arrowProps[] listOfChildren = new arrowProps[4];
+		listOfChildren = transform.GetComponentsInChildren<arrowProps>(true);
+		foreach (arrowProps prop in listOfChildren)
+		{
+			print("activating the arrows back up");
+			prop.gameObject.SetActive(true);
+		}
+	}
+
+	public void StopTheStompingMiniGame()
+	{
+		isPlaying = false;
+		player.isUsingSomething = false;
+		ClearButtonList();
+		StopAllCoroutines();
+		qsForThisStage = 0;
 	}
 
 	IEnumerator ChooseArrowToPress()
@@ -44,7 +78,7 @@ public class StompingMinigame : MonoBehaviour {
 		{
 			arrowToPressNow.GetComponent<Animator>().SetBool("isBlinking", false);
 		}
-		arrowToPressNow = listOfArrows[Random.Range(0, 4)];
+		arrowToPressNow = listOfArrows[UnityEngine.Random.Range(0, 4)];
 		arrowToPressNow.GetComponent<Animator>().SetBool("isBlinking", true);
 		print("Chose a new arrow");
 		yield return new WaitForSeconds(2);
@@ -54,15 +88,16 @@ public class StompingMinigame : MonoBehaviour {
 
 	void ClearButtonList()
 	{
-		listOfButtons = new List<StompingButton>();
+		listOfButtons.Clear();
 		for (int i = 0; i < amountOfButtonsToDisplay; i++)
 		{
 			
 			arrowProps[] listOfChildren = transform.GetComponentsInChildren<arrowProps>();
 			foreach (arrowProps prop in listOfChildren)
 			{
-				Destroy(prop.gameObject);
+				prop.gameObject.SetActive(false);
 			}
+			
 
 			
 		}
@@ -71,7 +106,9 @@ public class StompingMinigame : MonoBehaviour {
 
 	void GenerateANewButtonList()
 	{
-		for(int i = 0; i < amountOfButtonsToDisplay; i++)
+		listOfButtons = new List<StompingButton>();
+
+		for (int i = 0; i < amountOfButtonsToDisplay; i++)
 		{
 			
 			listOfButtons.Add(new StompingButton());
@@ -108,7 +145,7 @@ public class StompingMinigame : MonoBehaviour {
 			if (Input.GetKeyDown(arrowToPressNow.GetComponent<arrowProps>().keyCode))
 			{
 				print("CORRECT PRESS!");
-				if (qsForThisStage < 25)
+				if (qsForThisStage < 50)
 					qsForThisStage++;
 				StopAllCoroutines();
 				StartCoroutine(ChooseArrowToPress());

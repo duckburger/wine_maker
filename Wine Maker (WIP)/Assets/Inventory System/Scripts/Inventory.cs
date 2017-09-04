@@ -11,10 +11,10 @@ public class Inventory : MonoBehaviour {
 	GameObject slotPanel; // Reference to the UI element
 	public GameObject inventorySlot; // Reference to the prefab of a slot (with a background)
 	public GameObject inventoryItem; // Reference to the prefab of an item (an GO with an image on it)
+	public GameObject lastAddedItem = null;
 
 	public List<Item> inventoryItems = new List<Item>(); // A lits of all items in inventory
 	public List<GameObject> slots = new List<GameObject>(); // A list of all slots in inventory
-
 
 
 	private int slotAmount; // How many slots to spawn
@@ -43,8 +43,8 @@ public class Inventory : MonoBehaviour {
 
 		
 		AddItem("empty_grape_basket", 1);
-		AddItem("full_grape_basket_s", 1);
-
+		//AddItem("full_grape_basket_s", 1);
+		//AddItem("full_grape_basket_s", 1);
 
 	}
 
@@ -73,7 +73,6 @@ public class Inventory : MonoBehaviour {
 				if (inventoryItems[i].itemSlug == null) // Add this item to an empty slot if the item is not stackable or there isn't an instance of this item in the inventory
 				{
 					inventoryItems[i] = itemToAdd;
-
 					GameObject invObj = Instantiate(inventoryItem); // Spawning the inventory item prefab to then fill out with the passed item's properties
 
 					invObj.transform.SetParent(slots[i].transform);   // Parent the item prefab to the current slot
@@ -89,6 +88,8 @@ public class Inventory : MonoBehaviour {
 
 					invObj.name = itemToAdd.itemName; // Change the prefab's name to that of the item it will represent
 
+					lastAddedItem = slots[i].gameObject.GetComponentInChildren<ItemData>().gameObject;
+
 					return inventoryItems[i];
 				}
 			}
@@ -100,7 +101,7 @@ public class Inventory : MonoBehaviour {
 			if (inventoryItems[i].itemSlug == null) // Add this item to an empty slot if the item is not stackable or there isn't an instance of this item in the inventory
 			{
 				inventoryItems[i] = itemToAdd;
-
+			
 				GameObject invObj = Instantiate(inventoryItem); // Spawning the inventory item prefab to then fill out with the passed item's properties
 
 				invObj.transform.SetParent(slots[i].transform);   // Parent the item prefab to the current slot
@@ -117,17 +118,18 @@ public class Inventory : MonoBehaviour {
 				invObj.GetComponentInChildren<Text>().text = invObj.GetComponent<ItemData>().amount.ToString(); // Write the amount of item in the bottom right corner
 
 				invObj.name = itemToAdd.itemName; // Change the prefab's name to that of the item it will represent
+				lastAddedItem = slots[i].gameObject.GetComponentInChildren<ItemData>().gameObject;
 				return inventoryItems[i];
 			}
 			else if ((inventoryItems[i].itemSlug == itemToAdd.itemSlug && itemToAdd.itemStackable && amountOfItem >= 20))
 			{
-
 				int differenceToTwenty = 20 - slots[i].GetComponentInChildren<ItemData>().amount;
 				slots[i].GetComponentInChildren<ItemData>().amount += (differenceToTwenty); // Add the passed amount to the slot with the same item
 				slots[i].GetComponentInChildren<Text>().text = slots[i].GetComponentInChildren<ItemData>().amount.ToString(); // Write the new amount of item out
 				int remainingAmount = amountOfItem - differenceToTwenty;
 
 				AddRemainingAmountOfItem(itemToAdd, remainingAmount);
+				lastAddedItem = slots[i].gameObject.GetComponentInChildren<ItemData>().gameObject;
 
 				return inventoryItems[i];
 			}
@@ -144,6 +146,7 @@ public class Inventory : MonoBehaviour {
 
 				AddRemainingAmountOfItem(itemToAdd, remainingAmount);
 
+				lastAddedItem = slots[i].gameObject.GetComponentInChildren<ItemData>().gameObject;
 				return inventoryItems[i];
 			}
 			else if (inventoryItems[i].itemSlug == itemToAdd.itemSlug && itemToAdd.itemStackable && amountOfItem > 0) // Add the amount of this item to an already existing stack
@@ -154,6 +157,7 @@ public class Inventory : MonoBehaviour {
 				slots[i].GetComponentInChildren<ItemData>().amount += amountOfItem; // Add the passed amount to the slot with the same item
 				slots[i].GetComponentInChildren<Text>().text = slots[i].GetComponentInChildren<ItemData>().amount.ToString(); // Write the new amount of item out
 
+				lastAddedItem = slots[i].gameObject.GetComponentInChildren<ItemData>().gameObject;
 				return inventoryItems[i];
 
 			}

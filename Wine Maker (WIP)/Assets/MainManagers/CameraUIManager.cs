@@ -15,7 +15,7 @@ public class CameraUIManager : MonoBehaviour {
 	[SerializeField] bool isInventoryOpen = false;
 
 	public bool menuSpawned = false;
-
+	public GameObject notificationsPanel;
 	public delegate void OnRightMouseClick(GameObject currentlySelectedObject); // declare new delegate type
 	public event OnRightMouseClick notifyMouseClickObservers; // notifies classes that the cameraUImanager detected a right click
 	public List<Transform> trackedBuildings;
@@ -276,6 +276,6 @@ public class CameraUIManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void LateUpdate () {
-		transform.position = new Vector3 (objectToLookAt.transform.position.x, objectToLookAt.transform.position.y - 0.1f);
+		transform.position = new Vector3 (objectToLookAt.transform.position.x, objectToLookAt.transform.position.y + 0.2f);
 	}
 }

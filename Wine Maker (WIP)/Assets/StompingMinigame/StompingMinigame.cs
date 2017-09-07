@@ -196,15 +196,25 @@ public class StompingMinigame : MonoBehaviour {
 
 		}
 
-
-			if (Input.GetKeyDown(arrowToPressNow.GetComponent<arrowProps>().keyCode))
+			if (Input.anyKeyDown)
 			{
-				print("CORRECT PRESS!");
-				if (qsForThisStage < 50)
-					qsForThisStage++;
-				StopAllCoroutines();
-				StartCoroutine(ChooseArrowToPress());
+				if (Input.GetKeyDown(arrowToPressNow.GetComponent<arrowProps>().keyCode))
+				{
+					print("CORRECT PRESS!");
+					if (qsForThisStage < 50)
+						qsForThisStage++;
+					StopAllCoroutines();
+					StartCoroutine(ChooseArrowToPress());
+				}
+				else 
+				{
+					if (qsForThisStage >= 0)
+						qsForThisStage--;
+					StopAllCoroutines();
+					StartCoroutine(ChooseArrowToPress());
+				}
 			}
+			
 		}
 		
 	}

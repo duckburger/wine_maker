@@ -34,11 +34,10 @@ public class HomeActions : MonoBehaviour
 		if (collider.gameObject.CompareTag("Player"))
 		{
 
-			if (collider.gameObject.CompareTag("Player"))
-			{
+			
 				mySpriteRenderer.material.shader = Shader.Find("Sprites/Default");
 
-			}
+			
 		}
 	}
 }

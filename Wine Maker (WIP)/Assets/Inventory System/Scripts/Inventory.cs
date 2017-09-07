@@ -20,10 +20,11 @@ public class Inventory : MonoBehaviour {
 
 
 	private int slotAmount; // How many slots to spawn
+	private CameraUIManager cameraUIManager;
 
 	// Use this for initialization
 	void Start() {
-
+		cameraUIManager = FindObjectOfType<CameraUIManager>();
 		itemDatabase = GetComponent<ItemDatabase>();
 
 		slotAmount = 8;
@@ -82,13 +83,16 @@ public class Inventory : MonoBehaviour {
 					invObj.transform.localScale = new Vector3(1, 1, 1);  // Normalize its size
 					invObj.GetComponent<Image>().sprite = itemToAdd.itemIcon;  // Change its image to one of the added item
 
+					var itemData = invObj.GetComponent<ItemData>();
 
-					invObj.GetComponent<ItemData>().currentSlot = i;   // Set the item's slot to current slot
-					invObj.GetComponent<ItemData>().amount = amountOfItem; // Set the amount to the amount we added
-					invObj.GetComponent<ItemData>().item = itemToAdd; // Notify the profab that it is the added item
+					itemData.currentSlot = i;   // Set the item's slot to current slot
+					itemData.amount = amountOfItem; // Set the amount to the amount we added
+					itemData.item = itemToAdd; // Notify the profab that it is the added item
 					invObj.GetComponentInChildren<Text>().text = invObj.GetComponent<ItemData>().amount.ToString(); // Write the amount of item in the bottom right corner
 
 					invObj.name = itemToAdd.itemName; // Change the prefab's name to that of the item it will represent
+
+					cameraUIManager.notificationsPanel.GetComponentInChildren<Text>().text = "Picked up " + amountOfItem + itemData.item.itemName;
 
 					lastAddedItem = slots[i].gameObject.GetComponentInChildren<ItemData>().gameObject;
 
@@ -113,13 +117,17 @@ public class Inventory : MonoBehaviour {
 				invObj.transform.localScale = new Vector3(1, 1, 1);  // Normalize its size
 				invObj.GetComponent<Image>().sprite = itemToAdd.itemIcon;  // Change its image to one of the added item
 
+				var itemData = invObj.GetComponent<ItemData>();
 
-				invObj.GetComponent<ItemData>().currentSlot = i;   // Set the item's slot to current slot
-				invObj.GetComponent<ItemData>().amount = amountOfItem; // Set the amount to the amount we added
-				invObj.GetComponent<ItemData>().item = itemToAdd; // Notify the profab that it is the added item
+				itemData.currentSlot = i;   // Set the item's slot to current slot
+				itemData.amount = amountOfItem; // Set the amount to the amount we added
+				itemData.item = itemToAdd; // Notify the profab that it is the added item
 				invObj.GetComponentInChildren<Text>().text = invObj.GetComponent<ItemData>().amount.ToString(); // Write the amount of item in the bottom right corner
 
 				invObj.name = itemToAdd.itemName; // Change the prefab's name to that of the item it will represent
+
+				cameraUIManager.notificationsPanel.GetComponentInChildren<Text>().text = "Picked up " + amountOfItem + " " + itemData.item.itemName;
+
 				lastAddedItem = slots[i].gameObject.GetComponentInChildren<ItemData>().gameObject;
 				return inventoryItems[i];
 			}

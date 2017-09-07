@@ -324,7 +324,7 @@ MonoBehaviour:
   stompingTimer: {fileID: 0}
   wineBucket: {fileID: 0}
   effector: {fileID: 0}
-  stompTimer: 10
+  stompTimer: 15
   leftArrow: {fileID: 21300000, guid: 0623a2ab5dfde184d8d0b943b790bc32, type: 3}
   rightArrow: {fileID: 21300000, guid: 600d5f729f1cc6549bbe52ef66c30707, type: 3}
   upArrow: {fileID: 21300000, guid: cddaa0e7c65c0f741a26afc373e95fe5, type: 3}

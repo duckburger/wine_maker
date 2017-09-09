@@ -20,11 +20,11 @@ public class Inventory : MonoBehaviour {
 
 
 	private int slotAmount; // How many slots to spawn
-	private CameraUIManager cameraUIManager;
+	private NotificationsManager notificationsManager;
 
 	// Use this for initialization
 	void Start() {
-		cameraUIManager = FindObjectOfType<CameraUIManager>();
+		notificationsManager = FindObjectOfType<NotificationsManager>();
 		itemDatabase = GetComponent<ItemDatabase>();
 
 		slotAmount = 8;
@@ -45,9 +45,9 @@ public class Inventory : MonoBehaviour {
 
 
 		
-		AddItem("empty_grape_basket", 1);
-		AddItem("full_grape_basket_s", 1);
-		AddItem("full_grape_basket_s", 1);
+		AddItem("full_clay_jar", 1);
+		AddItem("empty_wine_barrel", 1);
+
 
 	}
 
@@ -92,8 +92,8 @@ public class Inventory : MonoBehaviour {
 
 					invObj.name = itemToAdd.itemName; // Change the prefab's name to that of the item it will represent
 
-					cameraUIManager.notificationsPanel.GetComponentInChildren<Text>().text = "Picked up " + amountOfItem + itemData.item.itemName;
 
+					notificationsManager.StartSpawningText("Picked up " + itemData.amount + "of " + itemData.name);
 					lastAddedItem = slots[i].gameObject.GetComponentInChildren<ItemData>().gameObject;
 
 					return inventoryItems[i];
@@ -115,6 +115,7 @@ public class Inventory : MonoBehaviour {
 				
 				//Debug.Log("Added the " + itemToAdd.itemName + " to the inventory");
 				invObj.transform.localScale = new Vector3(1, 1, 1);  // Normalize its size
+				
 				invObj.GetComponent<Image>().sprite = itemToAdd.itemIcon;  // Change its image to one of the added item
 
 				var itemData = invObj.GetComponent<ItemData>();
@@ -126,7 +127,8 @@ public class Inventory : MonoBehaviour {
 
 				invObj.name = itemToAdd.itemName; // Change the prefab's name to that of the item it will represent
 
-				cameraUIManager.notificationsPanel.GetComponentInChildren<Text>().text = "Picked up " + amountOfItem + " " + itemData.item.itemName;
+				notificationsManager.StartSpawningText("Picked up " + itemData.amount + " " + itemData.name);
+
 
 				lastAddedItem = slots[i].gameObject.GetComponentInChildren<ItemData>().gameObject;
 				return inventoryItems[i];

@@ -20,8 +20,26 @@ GameObject:
   m_Component:
   - component: {fileID: 4262231111276544}
   - component: {fileID: 212383831306088158}
-  m_Layer: 0
+  - component: {fileID: 60905131076820736}
+  - component: {fileID: 114368069790628610}
+  m_Layer: 9
   m_Name: FermentationJar
+  m_TagString: Building
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1729776071195084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4728617380004900}
+  - component: {fileID: 114879204204796610}
+  m_Layer: 9
+  m_Name: BuildingUISocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,10 +54,90 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4728617380004900}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4728617380004900
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1729776071195084}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.333, y: 0.336, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4262231111276544}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &60905131076820736
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1305978638312666}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0.19999999, y: 0.14, z: 0.25, w: 0.28}
+    pivot: {x: 0.473969, y: 0.14652689}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.136031, y: 0.59347314}
+      - {x: -0.123968996, y: 0.59347314}
+      - {x: -0.293969, y: 0.4634731}
+      - {x: -0.293969, y: -0.02652687}
+      - {x: 0.256031, y: -0.02652687}
+      - {x: 0.28603098, y: -0.01652687}
+      - {x: 0.296031, y: 0.113473125}
+      - {x: 0.296031, y: 0.4334731}
+--- !u!114 &114368069790628610
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1305978638312666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dfbb5e955808974cb38aaff457a5780, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasInterior: 0
+  isBeingUsed: 0
+  qSToRemember: 0
+  qSForThisStage: 0
+  emptyJarSprite: {fileID: 21300000, guid: cd631d804544d024185bf43dfa9f7e0a, type: 3}
+  fullJarSprite: {fileID: 21300000, guid: deec7be1992192a4fa532e6f96d1bff7, type: 3}
+  timesBeforeReady: 3
+  currentIncrement: 0
+  t: 0
+  fermentationDone: 0
+  fermentatationAlertInterval: 0
+  fermenting: 0
+--- !u!114 &114879204204796610
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1729776071195084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 817085af093bb774d9d8cb23c153548d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212383831306088158
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -10,12 +10,14 @@ public class CameraUIManager : MonoBehaviour {
 	public bool sceneEnding;
 	public bool sceneStarting = true;
 	public GameObject currentlyVisibleMenu;
+	
 
 	[SerializeField] GameObject inventoryPanel;
 	[SerializeField] bool isInventoryOpen = false;
 
 	public bool menuSpawned = false;
 	public GameObject notificationsPanel;
+	public GameObject textOfNote;
 	public delegate void OnRightMouseClick(GameObject currentlySelectedObject); // declare new delegate type
 	public event OnRightMouseClick notifyMouseClickObservers; // notifies classes that the cameraUImanager detected a right click
 	public List<Transform> trackedBuildings;
@@ -32,6 +34,7 @@ public class CameraUIManager : MonoBehaviour {
 	private GameObject player;
 	private GameManager gameManager;
 	private InventoryManager inventoryManager;
+	
 	
 	private GameObject lastSelectedBuilding;
 	private Shader oldShader;
@@ -177,6 +180,8 @@ public class CameraUIManager : MonoBehaviour {
 		}
 
 	}*/
+
+	
 
 	void OnRightClick(GameObject currentlySelectedBuilding)
 	{

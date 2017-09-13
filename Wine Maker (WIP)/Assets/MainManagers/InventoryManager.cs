@@ -8,7 +8,7 @@ public class InventoryManager : MonoBehaviour {
 	[SerializeField] int currentBottles;
 	[SerializeField] int pricePerBottle;
 
-	public List<Bottle> bottlesInProduction = new List<Bottle>();
+	
 
 	// Use this for initialization
 	void Start() {

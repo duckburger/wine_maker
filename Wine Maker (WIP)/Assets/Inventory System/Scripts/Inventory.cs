@@ -45,9 +45,8 @@ public class Inventory : MonoBehaviour {
 
 
 		
-		AddItem("full_clay_jar", 1);
-		AddItem("empty_wine_barrel", 1);
-
+		AddItem("empty_grape_basket", 1);
+		
 
 	}
 

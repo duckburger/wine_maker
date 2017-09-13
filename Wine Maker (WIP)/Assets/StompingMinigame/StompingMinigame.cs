@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class StompingMinigame : MonoBehaviour {
 
 
-	public float qsForThisStage;
+	
 	public GameObject stompingSliderGO;
 	public Slider stompingTimer;
 	public GameObject wineBucket;
@@ -57,7 +57,7 @@ public class StompingMinigame : MonoBehaviour {
 
 		effector = wineBucket.GetComponentInChildren<ParticleSystem>();
 
-		qsForThisStage = 0;
+		
 		isPlaying = true;
 		animator.SetTrigger("isAppearing");
 		player.isUsingSomething = true;
@@ -95,7 +95,7 @@ public class StompingMinigame : MonoBehaviour {
 		ClearButtonList();
 		StopAllCoroutines();
 		animator.SetTrigger("isAppearing");
-		qsForThisStage = 0;
+		
 		wineBucket.GetComponentInChildren<WineBucket>().isBeingUsed = false;
 		wineBucket.GetComponentInChildren<WineBucket>().isEmpty = true;
 	}
@@ -186,7 +186,7 @@ public class StompingMinigame : MonoBehaviour {
 			
 			Item itemToAdd = inventory.AddItem("full_clay_jar", 1);
 
-			inventory.lastAddedItem.GetComponent<ItemData>().myBottleInProgress.qualityScore = wineBucket.GetComponent<WineBucket>().qSToRemember + qsForThisStage;
+			
 
 			wineBucket.GetComponent<WineBucket>().qSToRemember = 0;
 
@@ -201,15 +201,13 @@ public class StompingMinigame : MonoBehaviour {
 				if (Input.GetKeyDown(arrowToPressNow.GetComponent<arrowProps>().keyCode))
 				{
 					print("CORRECT PRESS!");
-					if (qsForThisStage < 50)
-						qsForThisStage++;
+					
 					StopAllCoroutines();
 					StartCoroutine(ChooseArrowToPress());
 				}
 				else 
 				{
-					if (qsForThisStage >= 0)
-						qsForThisStage--;
+					
 					StopAllCoroutines();
 					StartCoroutine(ChooseArrowToPress());
 				}

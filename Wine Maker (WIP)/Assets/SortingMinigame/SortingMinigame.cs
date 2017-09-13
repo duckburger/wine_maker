@@ -15,7 +15,7 @@ public class SortingMinigame : MonoBehaviour {
 	private PlayerMovement player;
 	private SortingTable sortingTable;
 
-	public float qsForThisStage;
+
 	public List<GrapeButton> grapeButtons = new List<GrapeButton>();
 	public float badGrapesRemoved;
 	public float goodGrapesRemoved;
@@ -43,23 +43,7 @@ public class SortingMinigame : MonoBehaviour {
 
 	}
 
-	void CalculateTheFinalQSForThisStage (float badGrapesRemoved, float goodGrapesRemoved)
-	{
-		float badGrapesValAsPerc = (badGrapesRemoved / 25) * 100;
-		float goodGrapesValAsPerc = (goodGrapesRemoved / 25) * 100;
-
-
-		float totalValForThisStage = badGrapesValAsPerc - goodGrapesRemoved;
-
-		
-
-		qsForThisStage = (25.0f / 100.0f)*totalValForThisStage;
-
-		
-
-
-
-	}
+	
 
 
 
@@ -94,15 +78,14 @@ public class SortingMinigame : MonoBehaviour {
 	{
 
 		animator.SetTrigger("isAppearing");
-		CalculateTheFinalQSForThisStage(badGrapesRemoved, goodGrapesRemoved);
+	
 		inventory.AddItem("full_grape_basket_s", 1);
 
-		inventory.lastAddedItem.GetComponent<ItemData>().myBottleInProgress.qualityScore += qsForThisStage;
+	
 
-		print("The quality score of the bottle you started creating is " + qsForThisStage + " so far");
 		player.isUsingSomething = false;
 		sortingTable.isBeingUsed = false;
-		qsForThisStage = 0;
+	
 		goodGrapesRemoved = 0;
 		badGrapesRemoved = 0;
 

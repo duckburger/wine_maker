@@ -119,7 +119,6 @@ public class GrapeBush : BuildingActions
 		inventory.RemoveItem("empty_grape_basket", 1);
 		inventory.AddItem("full_grape_basket_u", 1);
 
-		inventory.lastAddedItem.GetComponent<ItemData>().myBottleInProgress = new BottleInfo(); // Create a new isntance of a bottle in progress. We will build this bottle out throughout all the buildings.
 
 		isPickedClean = true;
 		myTimer = timeToRegenerate;

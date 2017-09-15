@@ -46,9 +46,7 @@ public class FermentationJar : BuildingActions {
 				isBeingUsed = true;
 				fermenting = true;
 
-				StopCoroutine(FermentationTimer(Random.Range(5, 7)));
-				StartCoroutine(FermentationTimer(Random.Range(5, 7)));
-
+				StartCoroutine(Ferment(Random.Range(6, 12)));
 
 				Destroy(cameraUIManager.currentlyVisibleMenu);
 				cameraUIManager.menuSpawned = false;
@@ -58,64 +56,43 @@ public class FermentationJar : BuildingActions {
 			notificationsManager.StartSpawningText("Bring a jar full of wine to activate this building");
 		}
 
-
-		 if (fermenting && !gotPoints && isBeingUsed)
+		 if (fermentationDone && inventory.CheckForItemInInventory("empty_wine_barrel"))
 		{
-			
-			gotPoints = true;
-			notificationsManager.StartSpawningText("Jar stirred, quality of the final product increased");
+			mySpriteRenderer.sprite = emptyJarSprite;
+			isBeingUsed = false;
+			inventory.RemoveItem("empty_wine_barrel", 1);
+			inventory.AddItem("full_wine_barrel", 1);
+		}
+
+
+		if (!fermentationDone)
+		{
+			notificationsManager.StartSpawningText("The wine is still fermenting!");
 			return;
 		}
-
-		 if (fermenting && gotPoints && isBeingUsed)
-			{
-			notificationsManager.StartSpawningText("The jar doesn't need stirring for now");
-
-		}
+		notificationsManager.StartSpawningText("You need an empty wine barrel to store the fermented wine");
 
 
-
-		if (fermentationDone)
-		{
-			if (inventory.CheckForItemInInventory("empty_wine_barrel"))
-			{
-				inventory.RemoveItem("empty_wine_barrel", 1);
-				inventory.AddItem("full_wine_barrel", 1);
-				
-				isBeingUsed = false;
-				fermentationDone = false;
-				return;
-			}
-
-			notificationsManager.StartSpawningText("Bring an empty wine barrel to store the wine!");
-		}
-
-
+	
 
 	}
 
-
-	IEnumerator FermentationTimer(float timer)
+	IEnumerator Ferment(float timer)
 	{
+		var timerMem = timer;
 
-		float time = timer;
-		while (timer > 0)
+
+		while (timer > 0.0001f)
 		{
-			
-			fermenting = true;
 			timer -= Time.deltaTime;
-			progressBar.GetComponent<Image>().fillAmount = timer / time;
-			
-	
-			
+			progressBar.GetComponentInChildren<Image>().fillAmount = timer /  timerMem;
 			yield return null;
 		}
-		notificationsManager.StartSpawningText("Don't forget to stir the fermentation jar");
-		currentIncrement++;
+		fermentationDone = true;
+		fermenting = false;
 		
 
 	}
-
 
 
 

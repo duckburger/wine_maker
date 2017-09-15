@@ -11,7 +11,7 @@ public class GrapeBush : BuildingActions
 	public float myTimer;
 	public GameObject grapeBunch;
 
-
+	private NotificationsManager notificationsManager;
 	private CameraUIManager cameraUIManager;
 	private GameObject grapesHolder;
 	[SerializeField] bool isBeingUsed;
@@ -26,6 +26,7 @@ public class GrapeBush : BuildingActions
 	// Use this for initialization
 	void Start()
 	{
+		notificationsManager = FindObjectOfType<NotificationsManager>();
 
 		cameraUIManager = FindObjectOfType<CameraUIManager>();
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
@@ -42,6 +43,27 @@ public class GrapeBush : BuildingActions
 			bunchPositions.Add(grapeBunchTransform.position);
 		}
 		inventory = FindObjectOfType<Inventory>();
+
+	}
+
+	public override void HandleInteractions()
+	{
+		if (!isBeingUsed && Vector2.Distance(player.transform.position, transform.position) <= 0.5f && !isPickedClean)
+		{
+
+			if (inventory.CheckForItemInInventory("empty_grape_basket"))
+			{
+				player.isUsingSomething = true;
+
+				isBeingUsed = true;
+				StartCoroutine(DeleteGrapesFromTree());
+				Destroy(cameraUIManager.currentlyVisibleMenu);
+				cameraUIManager.menuSpawned = false;
+			}
+			notificationsManager.StartSpawningText("You need an empty bucket to pick grapes");
+
+		}
+
 
 	}
 
@@ -81,23 +103,7 @@ public class GrapeBush : BuildingActions
 		
 	}
 
-	public override void HandleInteractions()
-	{
-		if (!isBeingUsed && Vector2.Distance(player.transform.position, transform.position) <= 0.5f && inventory.CheckForItemInInventory("empty_grape_basket") && !isPickedClean)
-		{
-			player.isUsingSomething = true;
-
-			isBeingUsed = true;
-			StartCoroutine(DeleteGrapesFromTree());
-			Destroy(cameraUIManager.currentlyVisibleMenu);
-			cameraUIManager.menuSpawned = false;
-
-
-
-		}
-
-		
-	}
+	
 
 	IEnumerator DeleteGrapesFromTree()
 	{

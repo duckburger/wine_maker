@@ -45,8 +45,10 @@ public class Inventory : MonoBehaviour {
 
 
 		
-		AddItem("empty_grape_basket", 1);
-		
+		AddItem("full_clay_jar", 1);
+		AddItem("empty_wine_barrel", 1);
+
+
 
 	}
 
@@ -92,7 +94,8 @@ public class Inventory : MonoBehaviour {
 					invObj.name = itemToAdd.itemName; // Change the prefab's name to that of the item it will represent
 
 
-					notificationsManager.StartSpawningText("Picked up " + itemData.amount + "of " + itemData.name);
+					notificationsManager.StartSpawningText("+ " + " " + itemData.amount + " " + itemData.name);
+
 					lastAddedItem = slots[i].gameObject.GetComponentInChildren<ItemData>().gameObject;
 
 					return inventoryItems[i];
@@ -126,7 +129,8 @@ public class Inventory : MonoBehaviour {
 
 				invObj.name = itemToAdd.itemName; // Change the prefab's name to that of the item it will represent
 
-				notificationsManager.StartSpawningText("Picked up " + itemData.amount + " " + itemData.name);
+
+				notificationsManager.StartSpawningText("+ " + " " + itemData.amount + " " + itemData.name);
 
 
 				lastAddedItem = slots[i].gameObject.GetComponentInChildren<ItemData>().gameObject;

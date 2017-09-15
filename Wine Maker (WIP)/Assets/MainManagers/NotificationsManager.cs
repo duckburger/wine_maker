@@ -7,67 +7,35 @@ public class NotificationsManager : MonoBehaviour {
 
 	
 	public GameObject textNote;
-	public float durationOfNotification;
-	public float timer;
-
-	private Vector2 textStartPos;
-	private Vector2 textEndPos;
-	private Text text;
-	private List<GameObject> allTextNotes = new List<GameObject>();
-	public Queue<string> allStringsToDisplay = new Queue<string>();
-	[SerializeField] bool currentlySpawningText;
-	
 
 	public Color colorMemory;
-	public float moveSpeed;
+	public Transform player;
+
 
 	// Use this for initialization
 	void Start()
 	{
-		textStartPos = transform.position;
-		textEndPos = new Vector2(transform.position.x, transform.position.y + 10);
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+		
 
-		for (int i = 0; i < 3; i++)
-		{
-			allTextNotes.Add(Instantiate(textNote, transform.position, Quaternion.identity, transform));
-			allTextNotes[i].SetActive(false);
-		}
 		
 		
 	}
 
 	public void StartSpawningText(string textOfNotification)
 	{
+		var x = player.position.x;
+		var y = player.position.y + 0.5f;
 
-		if (allStringsToDisplay.Count >= 3)
-		{
-			allStringsToDisplay.Clear();
-		}
+		var currentNotification = Instantiate(textNote,  new Vector3(x, y + Random.Range(0.2f, 0.5f)), Quaternion.identity);
+		currentNotification.GetComponent<Text>().text = textOfNotification;
 
-		allStringsToDisplay.Enqueue(textOfNotification);
-
-		foreach (GameObject notes in allTextNotes)
-		{
-			if (notes.active = false)
-			{
-
-			}
-		}
-
-
-		
-
-		
 	}
 
 
 
-
-	
-	
 	// Update is called once per frame
-	void Update () {
-
+	void Update () { 
 		
 	}
 }

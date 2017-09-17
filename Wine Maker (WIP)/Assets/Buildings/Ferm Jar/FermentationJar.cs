@@ -62,6 +62,7 @@ public class FermentationJar : BuildingActions {
 			isBeingUsed = false;
 			inventory.RemoveItem("empty_wine_barrel", 1);
 			inventory.AddItem("full_wine_barrel", 1);
+			return;
 		}
 
 
@@ -70,6 +71,7 @@ public class FermentationJar : BuildingActions {
 			notificationsManager.StartSpawningText("The wine is still fermenting!");
 			return;
 		}
+
 		notificationsManager.StartSpawningText("You need an empty wine barrel to store the fermented wine");
 
 

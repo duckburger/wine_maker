@@ -10,7 +10,7 @@ public class CameraUIManager : MonoBehaviour {
 	public bool sceneEnding;
 	public bool sceneStarting = true;
 	public GameObject currentlyVisibleMenu;
-	
+	public NotificationsManager notificationsManager;
 
 	[SerializeField] GameObject inventoryPanel;
 	[SerializeField] bool isInventoryOpen = false;
@@ -252,23 +252,29 @@ public class CameraUIManager : MonoBehaviour {
 				}
 			}
 
-			if (hit.collider.gameObject.tag == "LandExtender" && inventoryManager.CurrentBalance >= 10000f)
+			if (hit.collider.gameObject.tag == "LandExtender")
 			{
-				inventoryManager.UpdateBalance(-10000f);
-				Transform slotToInstantiateIn = hit.collider.gameObject.transform.parent;
-				Destroy(hit.collider.gameObject);
-
-				if (slotToInstantiateIn.position.x < FindObjectOfType<HomeActions>().transform.position.x)
+				if (inventoryManager.CurrentBalance >= 10000f)
 				{
-					GameObject leftExtendedLand = Instantiate(leftLandExtender, slotToInstantiateIn.transform.position, Quaternion.identity, slotToInstantiateIn);
-					Instantiate(leftLandExtWarning, leftExtendedLand.GetComponentInChildren<ExtenderSlot>().transform.position, Quaternion.identity, leftExtendedLand.GetComponentInChildren<ExtenderSlot>().transform);
+					inventoryManager.UpdateBalance(-10000f);
+					Transform slotToInstantiateIn = hit.collider.gameObject.transform.parent;
+					Destroy(hit.collider.gameObject);
 
-				} else if (slotToInstantiateIn.position.x > FindObjectOfType<HomeActions>().transform.position.x)
-				{
-					GameObject rightExtendedLand =  Instantiate(rightLandExtender, slotToInstantiateIn.transform.position, Quaternion.identity, slotToInstantiateIn);
-					Instantiate(rightLandExtWarning, rightExtendedLand.GetComponentInChildren<ExtenderSlot>().transform.position, Quaternion.identity, rightExtendedLand.GetComponentInChildren<ExtenderSlot>().transform);
+					if (slotToInstantiateIn.position.x < FindObjectOfType<HomeActions>().transform.position.x)
+					{
+						GameObject leftExtendedLand = Instantiate(leftLandExtender, slotToInstantiateIn.transform.position, Quaternion.identity, slotToInstantiateIn);
+						Instantiate(leftLandExtWarning, leftExtendedLand.GetComponentInChildren<ExtenderSlot>().transform.position, Quaternion.identity, leftExtendedLand.GetComponentInChildren<ExtenderSlot>().transform);
+
+					}
+					else if (slotToInstantiateIn.position.x > FindObjectOfType<HomeActions>().transform.position.x)
+					{
+						GameObject rightExtendedLand = Instantiate(rightLandExtender, slotToInstantiateIn.transform.position, Quaternion.identity, slotToInstantiateIn);
+						Instantiate(rightLandExtWarning, rightExtendedLand.GetComponentInChildren<ExtenderSlot>().transform.position, Quaternion.identity, rightExtendedLand.GetComponentInChildren<ExtenderSlot>().transform);
+					}
 				}
-			}
+				notificationsManager.StartSpawningText("Not enough money!");
+				
+			} 
 
 		}
 

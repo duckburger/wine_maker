@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ItemData : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler, IPointerExitHandler, IPointerEnterHandler { // These interfaces are required to implement the drop and drag methods as well as tolltip hover
+
+
+public class ItemData : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler, IPointerExitHandler, IPointerEnterHandler, IPointerUpHandler { // These interfaces are required to implement the drop and drag methods as well as tolltip hover
 
 	public Item item;  // Set so the item knows which one it is
 	public int amount; // Set so the item knows how many of itself there is in the inventory
 	public int currentSlot; // Set so the item knows which inventory slot it's in
-	public BottleInfo myBottleInProgress;
 
 	private Tooltip tooltip;
 	
@@ -38,6 +39,17 @@ public class ItemData : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDr
 
 	}
 
+	public void OnPointerUp(PointerEventData eventData)
+	{
+		this.transform.SetParent(inventory.slots[currentSlot].transform); // When we stop dragging set the item's parent back to its slot
+		this.transform.position = inventory.slots[currentSlot].transform.position; // Reset its position as well
+		if (this.GetComponent<CanvasGroup>())
+		{
+			this.GetComponent<CanvasGroup>().blocksRaycasts = true; // Allow it to receive raycasts again
+
+		}
+	}
+
 	public void OnDrag(PointerEventData eventData) // When we drag the mouse simply move the item with the cursor
 	{
 		if (item != null)
@@ -47,12 +59,16 @@ public class ItemData : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDr
 
 	
 
-	public void OnEndDrag(PointerEventData eventData) // (Fires before OnDrop) When we stop dragging...
+	public void OnEndDrag(PointerEventData eventData) // (Fires after OnDrop) When we stop dragging...
 	{
 		
 		this.transform.SetParent(inventory.slots[currentSlot].transform); // When we stop dragging set the item's parent back to its slot
 		this.transform.position = inventory.slots[currentSlot].transform.position; // Reset its position as well
-		this.GetComponent<CanvasGroup>().blocksRaycasts = true; // Allow it to receive raycasts again
+		if (this.GetComponent<CanvasGroup>())
+		{
+			this.GetComponent<CanvasGroup>().blocksRaycasts = true; // Allow it to receive raycasts again
+
+		}
 	}
 
 	public void OnPointerEnter(PointerEventData eventData)
@@ -68,18 +84,9 @@ public class ItemData : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDr
 	
 }
 
-[System.Serializable]
-public class BottleInfo
-{
-	public float age;
-	public float qualityScore;
 
 
-	public BottleInfo()
-	{
 
-	}
-}
 
 
 

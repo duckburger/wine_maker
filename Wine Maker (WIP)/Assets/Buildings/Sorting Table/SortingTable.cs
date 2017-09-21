@@ -11,6 +11,7 @@ public class SortingTable : BuildingActions {
 	private SortingMinigame sortingMiniGameController;
 	private CameraUIManager cameraUIManager;
 	private Inventory inventory;
+	private NotificationsManager notificationsManager;
 
 	private void Start()
 	{
@@ -18,6 +19,7 @@ public class SortingTable : BuildingActions {
 		player = FindObjectOfType<PlayerMovement>();
 		sortingMiniGameController = FindObjectOfType<SortingMinigame>();
 		inventory = FindObjectOfType<Inventory>();
+		notificationsManager = FindObjectOfType<NotificationsManager>(); 
 	}
 
 
@@ -29,8 +31,10 @@ public class SortingTable : BuildingActions {
 			sortingMiniGameController.StartTheSortingMiniGame();
 			Destroy(cameraUIManager.currentlyVisibleMenu);
 			cameraUIManager.menuSpawned = false;
+			return;
 		}
-		Debug.Log ("Cannot use " + this + " at this moment");
+		notificationsManager.StartSpawningText("You need to bring unsorted grapes to use this table");
+		
 
 
 

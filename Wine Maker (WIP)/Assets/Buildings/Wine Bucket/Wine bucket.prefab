@@ -190,7 +190,6 @@ MonoBehaviour:
   hasInterior: 0
   isEmpty: 0
   mySpriteRender: {fileID: 0}
-  qSToRemember: 0
   isBeingUsed: 0
   stompArea: {fileID: 4213116983990580}
   emptyStateImage: {fileID: 21300000, guid: f3a4b4542d1d5c14ba92f7c1b6aa8c44, type: 3}

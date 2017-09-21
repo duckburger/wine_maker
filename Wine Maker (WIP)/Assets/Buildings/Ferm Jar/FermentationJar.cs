@@ -54,6 +54,7 @@ public class FermentationJar : BuildingActions {
 
 			}
 			notificationsManager.StartSpawningText("Bring a jar full of wine to activate this building");
+			return;
 		}
 
 		 if (fermentationDone && inventory.CheckForItemInInventory("empty_wine_barrel"))

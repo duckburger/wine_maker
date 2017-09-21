@@ -8,11 +8,12 @@ public class Inventory : MonoBehaviour {
 
 	ItemDatabase itemDatabase;
 	public GameObject inventoryPanel; // Reference to the UI element
-	GameObject slotPanel; // Reference to the UI element
+	public GameObject slotPanel; // Reference to the UI element
 	public GameObject inventorySlot; // Reference to the prefab of a slot (with a background)
 	public GameObject inventoryItem; // Reference to the prefab of an item (an GO with an image on it)
 	public GameObject lastAddedItem = null;
 	public GameObject lastRemovedItem = null;
+	public bool isOverInventory;
 
 
 	public List<Item> inventoryItems = new List<Item>(); // A lits of all items in inventory
@@ -47,7 +48,8 @@ public class Inventory : MonoBehaviour {
 		
 		AddItem("full_clay_jar", 1);
 		AddItem("empty_wine_barrel", 1);
-
+		AddItem("full_wine_barrel", 1);
+		AddItem("aged_wine_barrel", 1);
 
 
 	}
@@ -113,6 +115,9 @@ public class Inventory : MonoBehaviour {
 				GameObject invObj = Instantiate(inventoryItem); // Spawning the inventory item prefab to then fill out with the passed item's properties
 
 				invObj.transform.SetParent(slots[i].transform);   // Parent the item prefab to the current slot
+				slots[i].GetComponent<Slot>().myCurrentItem = invObj;
+
+				slots[i].GetComponent<Slot>().myCurrentItem = invObj;
 				invObj.transform.localPosition = new Vector3(0, 0, 0);  // Center the prefab
 				
 				//Debug.Log("Added the " + itemToAdd.itemName + " to the inventory");
@@ -141,6 +146,7 @@ public class Inventory : MonoBehaviour {
 				int differenceToTwenty = 20 - slots[i].GetComponentInChildren<ItemData>().amount;
 				slots[i].GetComponentInChildren<ItemData>().amount += (differenceToTwenty); // Add the passed amount to the slot with the same item
 				slots[i].GetComponentInChildren<Text>().text = slots[i].GetComponentInChildren<ItemData>().amount.ToString(); // Write the new amount of item out
+
 				int remainingAmount = amountOfItem - differenceToTwenty;
 
 				AddRemainingAmountOfItem(itemToAdd, remainingAmount);
@@ -215,7 +221,9 @@ public class Inventory : MonoBehaviour {
 
 				GameObject invObj = Instantiate(inventoryItem); // Spawning the inventory item prefab to then fill out with the passed item's properties
 
-				invObj.transform.SetParent(slots[i].transform);   // Parent the item prefab to the current slot
+				invObj.transform.SetParent(slots[i].transform);   // Parent the item prefab to the current slot				
+				slots[i].GetComponent<Slot>().myCurrentItem = invObj;
+
 				invObj.transform.position = Vector2.zero;  // Center the prefab
 				invObj.transform.localScale = new Vector3(1, 1, 1);  // Normalize its size
 				invObj.GetComponent<Image>().sprite = itemToAdd.itemIcon;  // Change its image to one of the added item
@@ -256,21 +264,23 @@ public class Inventory : MonoBehaviour {
 				}
 				else if (slots[i].transform.GetChild(0).GetComponent<ItemData>().amount == amountToRemove)
 				{
-					lastRemovedItem = slots[i].gameObject.GetComponentInChildren<ItemData>().gameObject;
+					//lastRemovedItem = slots[i].gameObject.GetComponentInChildren<ItemData>().gameObject;
 					inventoryItems[i] = new Item();
-					
-					Destroy(slots[i].transform.GetChild(0).gameObject);
+
+					Destroy(slots[i].GetComponent<Slot>().myCurrentItem);
 					return;
 				}
 			}
 			else if (inventoryItems[i].itemSlug == itemToRemove.itemSlug)
 			{
-				print("Removed a non-stackable item");
-				lastRemovedItem = slots[i].gameObject.GetComponentInChildren<ItemData>().gameObject;
-
-				inventoryItems[i] = new Item();
-				Destroy(slots[i].transform.GetChild(0).gameObject);
 				
+				print("Removed a non-stackable item");
+
+				//lastRemovedItem = slots[i].gameObject.GetComponentInChildren<ItemData>().gameObject;
+
+				Destroy(slots[i].GetComponent<Slot>().myCurrentItem);
+				inventoryItems[i] = new Item();
+
 				return;
 			}
 			

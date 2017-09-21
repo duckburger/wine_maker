@@ -188,7 +188,7 @@ public class StompingMinigame : MonoBehaviour {
 
 			
 
-			wineBucket.GetComponent<WineBucket>().qSToRemember = 0;
+			
 
 			StopTheStompingMiniGame();
 			

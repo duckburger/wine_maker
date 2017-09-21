@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 92978746475795214}
   - component: {fileID: 124019198378035772}
   - component: {fileID: 81213715425113036}
+  - component: {fileID: 114696628054288620}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -41,7 +42,7 @@ GameObject:
   - component: {fileID: 114978236760255904}
   m_Layer: 0
   m_Name: Camera Manager
-  m_TagString: Untagged
+  m_TagString: CameraUIManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1336798147727644}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.034, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4556851488209978}
@@ -93,7 +94,7 @@ Camera:
   far clip plane: 1000
   field of view: 16.1
   orthographic: 1
-  orthographic size: 1.54
+  orthographic size: 0.97
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -123,6 +124,20 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1143764583333624}
   m_Enabled: 1
+--- !u!114 &114696628054288620
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1143764583333624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1690312454, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
 --- !u!114 &114978236760255904
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -135,12 +150,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 0}
-  fadeSpeed: 0
+  fadeSpeed: 7
   sceneEnding: 0
   sceneStarting: 1
+  currentlyVisibleMenu: {fileID: 0}
+  notificationsManager: {fileID: 0}
   inventoryPanel: {fileID: 0}
   isInventoryOpen: 0
   menuSpawned: 0
+  notificationsPanel: {fileID: 0}
+  textOfNote: {fileID: 1420164502487272, guid: 9bea3c122add67943b3b8ff0f2f66d82, type: 2}
   trackedBuildings: []
   playerInteriorChecker: {fileID: 0}
   buildingLayerMask:

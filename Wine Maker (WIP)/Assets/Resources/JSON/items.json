@@ -67,7 +67,15 @@
 		"description" : "A bottle full of wine. All that's left is to give this vintage a name and label it.",
 		"itemStackable" : "true"
 	},
-	
+
+	{
+		"id" : 10,
+		"slug" : "aged_wine_barrel",
+		"name" : "Aged Wine Barrel",
+		"description" : "A barrel with aged wine. All that is left is to bottle it and label it.",
+		"itemStackable" : "false"
+	},
+
 	
 ]
 

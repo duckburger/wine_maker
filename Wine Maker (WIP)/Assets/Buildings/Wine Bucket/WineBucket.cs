@@ -7,7 +7,6 @@ public class WineBucket : BuildingActions {
 
 	public bool isEmpty;
 	public SpriteRenderer mySpriteRender;
-	public float qSToRemember;
 	public bool isBeingUsed = false;
 
 
@@ -23,7 +22,7 @@ public class WineBucket : BuildingActions {
 	private Inventory inventory;
 	private StompingMinigame stompingMinigameController;
 	private CameraUIManager cameraUIManager;
-	
+	private NotificationsManager notificationsManager;
 
 
 
@@ -37,7 +36,7 @@ public class WineBucket : BuildingActions {
 		inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
 		isEmpty = true;
 		mySpriteRender = GetComponent<SpriteRenderer>();
-
+		notificationsManager = FindObjectOfType<NotificationsManager>();
 	}
 
 
@@ -56,19 +55,18 @@ public class WineBucket : BuildingActions {
 
 
 					inventory.RemoveItem("full_grape_basket_s", 1);
-					qSToRemember = inventory.lastRemovedItem.GetComponent<ItemData>().myBottleInProgress.qualityScore;
 
 
 
 					inventory.AddItem("empty_grape_basket", 1);
 
-					inventory.lastAddedItem.GetComponent<ItemData>().myBottleInProgress.qualityScore = qSToRemember;
 
 					mySpriteRender.sprite = fullStateImage; 
 
 					isEmpty = false;
 					return;
 				}
+				notificationsManager.StartSpawningText("You need to bring sorted grapes to start stomping!");
 			}
 
 			if (!isBeingUsed && !isEmpty)

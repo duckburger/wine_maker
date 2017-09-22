@@ -45,11 +45,13 @@ public class Inventory : MonoBehaviour {
 		}
 
 
-		
+		AddItem("full_grape_basket_s", 1);
 		AddItem("full_clay_jar", 1);
 		AddItem("empty_wine_barrel", 1);
 		AddItem("full_wine_barrel", 1);
 		AddItem("aged_wine_barrel", 1);
+		AddItem("full_wine_bottle", 5);
+		AddItem("empty_wine_bottle", 7);
 
 
 	}
@@ -72,7 +74,13 @@ public class Inventory : MonoBehaviour {
 	{
 		Item itemToAdd = itemDatabase.GetItem(slug); // Grabbing the item we want to add from the database
 
-		if (amountOfItem >= 20 && CheckIfInventoryHasEmptySlots())
+		if (!CheckIfInventoryHasEmptySlots())
+		{
+			notificationsManager.StartSpawningText("Inventory is full!");
+			return null;
+		}
+
+		if (amountOfItem >= 20)
 		{
 			for (int i = 0; i < inventoryItems.Count; i++) // Go through the items in inventory 
 			{
@@ -167,6 +175,8 @@ public class Inventory : MonoBehaviour {
 
 				AddRemainingAmountOfItem(itemToAdd, remainingAmount);
 
+				notificationsManager.StartSpawningText("+ " + " " + amountOfItem.ToString() + " " + itemDatabase.GetItem(slug).itemName);
+
 				lastAddedItem = slots[i].gameObject.GetComponentInChildren<ItemData>().gameObject;
 				return inventoryItems[i];
 			}
@@ -177,6 +187,8 @@ public class Inventory : MonoBehaviour {
 				slots[i].GetComponentInChildren<ItemData>().currentSlot = i; // Make sure this item's internal ID matches the slot's ID
 				slots[i].GetComponentInChildren<ItemData>().amount += amountOfItem; // Add the passed amount to the slot with the same item
 				slots[i].GetComponentInChildren<Text>().text = slots[i].GetComponentInChildren<ItemData>().amount.ToString(); // Write the new amount of item out
+
+				notificationsManager.StartSpawningText("+ " + " " + amountOfItem.ToString() + " " + itemDatabase.GetItem(slug).itemName);
 
 				lastAddedItem = slots[i].gameObject.GetComponentInChildren<ItemData>().gameObject;
 				return inventoryItems[i];

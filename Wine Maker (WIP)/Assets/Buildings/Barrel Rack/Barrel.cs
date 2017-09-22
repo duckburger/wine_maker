@@ -19,7 +19,6 @@ public class Barrel : MonoBehaviour
 	private PlayerMovement player;
 	private NotificationsManager notificationsManager;
 	private Inventory inventory;
-	private ItemDatabase itemDatabase;
 	[SerializeField] float agingTimer;
 	[SerializeField] bool doneAging;
 	[SerializeField] bool empty;
@@ -29,7 +28,6 @@ public class Barrel : MonoBehaviour
 	{
 		agingTimer = 25;
 		inventory = FindObjectOfType<Inventory>();
-		itemDatabase = FindObjectOfType<ItemDatabase>();
 		notificationsManager = FindObjectOfType<NotificationsManager>();
 		player = FindObjectOfType<PlayerMovement>();
 	}

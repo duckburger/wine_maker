@@ -108,6 +108,48 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &16790114
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 570250031}
+    m_Modifications:
+    - target: {fileID: 4271745766902374, guid: 21108b300ac9c7a4fa550dceb3ea8e08, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271745766902374, guid: 21108b300ac9c7a4fa550dceb3ea8e08, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271745766902374, guid: 21108b300ac9c7a4fa550dceb3ea8e08, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271745766902374, guid: 21108b300ac9c7a4fa550dceb3ea8e08, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271745766902374, guid: 21108b300ac9c7a4fa550dceb3ea8e08, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271745766902374, guid: 21108b300ac9c7a4fa550dceb3ea8e08, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271745766902374, guid: 21108b300ac9c7a4fa550dceb3ea8e08, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271745766902374, guid: 21108b300ac9c7a4fa550dceb3ea8e08, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 21108b300ac9c7a4fa550dceb3ea8e08, type: 2}
+  m_IsPrefabParent: 0
 --- !u!224 &321689768 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224725678905050456, guid: 947fe36c42759eb4eb9bf1137418efa0,
@@ -160,6 +202,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2550a2c053340ce40bbfc203daf40cbc, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &570250031 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4409380199447024, guid: c3e966cf7ed4b49438abc8f1665ee9e8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1372477822}
 --- !u!1001 &709236059
 Prefab:
   m_ObjectHideFlags: 0
@@ -460,17 +507,17 @@ Prefab:
     - target: {fileID: 224725678905050456, guid: 947fe36c42759eb4eb9bf1137418efa0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 1525.1
+      value: 1472
       objectReference: {fileID: 0}
     - target: {fileID: 224725678905050456, guid: 947fe36c42759eb4eb9bf1137418efa0,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: -115.08
+      value: -115.1
       objectReference: {fileID: 0}
     - target: {fileID: 224725678905050456, guid: 947fe36c42759eb4eb9bf1137418efa0,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: -961.88
+      value: -855.7
       objectReference: {fileID: 0}
     - target: {fileID: 224725678905050456, guid: 947fe36c42759eb4eb9bf1137418efa0,
         type: 2}
@@ -945,6 +992,15 @@ Prefab:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 212437605997443352, guid: c3e966cf7ed4b49438abc8f1665ee9e8,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1795432317058492, guid: c3e966cf7ed4b49438abc8f1665ee9e8, type: 2}
+      propertyPath: m_Name
+      value: CellarSlot1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3e966cf7ed4b49438abc8f1665ee9e8, type: 2}
   m_IsPrefabParent: 0
@@ -1352,7 +1408,7 @@ Prefab:
     - target: {fileID: 114786071391874840, guid: 24ebc143ba1d3044e8104aeb01ea5ed8,
         type: 2}
       propertyPath: m_FontData.m_BestFit
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114379048383787360, guid: 24ebc143ba1d3044e8104aeb01ea5ed8,
         type: 2}

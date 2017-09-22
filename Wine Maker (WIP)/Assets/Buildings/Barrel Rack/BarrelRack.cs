@@ -13,12 +13,14 @@ public class BarrelRack : BuildingActions, IDropHandler, IPointerEnterHandler, I
 	public Transform barrelSlots;
 	public Sprite emptyBarrelImage;
 	public List<GameObject> listOfBarrelSlots = new List<GameObject>();
-	
+
+	private NotificationsManager notificationsManager;
 
 
 	// Use this for initialization
 	void Start () {
 		inventory = FindObjectOfType<Inventory>();
+		notificationsManager = FindObjectOfType<NotificationsManager>();
 
 		for (int i = 0; i < 7; i++)
 		{
@@ -56,6 +58,7 @@ public class BarrelRack : BuildingActions, IDropHandler, IPointerEnterHandler, I
 
 						break;
 					}
+					notificationsManager.StartSpawningText("This barrel rack is full");
 				}
 			}
 
@@ -73,6 +76,8 @@ public class BarrelRack : BuildingActions, IDropHandler, IPointerEnterHandler, I
 
 						break;
 					}
+					notificationsManager.StartSpawningText("This barrel rack is full");
+
 				}
 			}
 		}

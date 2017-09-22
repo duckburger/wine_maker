@@ -18,7 +18,6 @@ public class GrapeBush : BuildingActions
 	private PlayerMovement player;
 	private Inventory inventory;
 	[SerializeField] bool isPickedClean;
-	private List<int> deletedBunches = new List<int>();
 	private List<Vector2> bunchPositions = new List<Vector2>();
 
 
@@ -59,6 +58,7 @@ public class GrapeBush : BuildingActions
 				StartCoroutine(DeleteGrapesFromTree());
 				Destroy(cameraUIManager.currentlyVisibleMenu);
 				cameraUIManager.menuSpawned = false;
+				return;
 			}
 			notificationsManager.StartSpawningText("You need an empty bucket to pick grapes");
 

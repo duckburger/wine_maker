@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TestRaycaster : MonoBehaviour {
 
-	float range = 5000f;
 	public LayerMask layerMask;
 
 	// Use this for initialization

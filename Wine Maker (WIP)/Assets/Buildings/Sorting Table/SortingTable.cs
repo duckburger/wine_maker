@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class SortingTable : BuildingActions {
+public class SortingTable : BuildingActions, IDropHandler {
 
 	public bool isBeingUsed;
 
@@ -23,20 +25,34 @@ public class SortingTable : BuildingActions {
 	}
 
 
-	public override void HandleInteractions()
+
+	
+	public void OnDrop(PointerEventData eventData)
 	{
-		if (!isBeingUsed && inventory.CheckForItemInInventory("full_grape_basket_u") == true)
-		{
-			
-			sortingMiniGameController.StartTheSortingMiniGame();
-			Destroy(cameraUIManager.currentlyVisibleMenu);
-			cameraUIManager.menuSpawned = false;
+
+
+			if (Vector3.Distance(player.transform.position, this.transform.position) < 0.4f)
+			{
+
+			if (eventData.pointerDrag.GetComponent<ItemData>().item.itemSlug == "empty_grape_basket_u")		{
+
+				if (!isBeingUsed && inventory.CheckForItemInInventory("full_grape_basket_u") == true)
+				{
+
+					sortingMiniGameController.StartTheSortingMiniGame();
+					Destroy(cameraUIManager.currentlyVisibleMenu);
+					cameraUIManager.menuSpawned = false;
+					return;
+				}
+			}
+			notificationsManager.StartSpawningText("You need to bring unsorted grapes to use this table");
 			return;
-		}
-		notificationsManager.StartSpawningText("You need to bring unsorted grapes to use this table");
-		
 
 
-
+			}
+		notificationsManager.StartSpawningText("Too far away!");
+		return;
 	}
+	 
+
 }

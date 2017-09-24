@@ -26,10 +26,10 @@ public class GoodOrBadButton : MonoBehaviour, IPointerDownHandler {
 	{
 		if (valueOfThis == GrapeButton.ButtonValue.Good)
 		{
-			sortingMiniGameController.goodGrapesRemoved += 1;
+			
 			Destroy(gameObject);
 		} else if (valueOfThis == GrapeButton.ButtonValue.Bad) {
-			sortingMiniGameController.badGrapesRemoved += 1;
+
 			Destroy(gameObject);
 		}
 	}

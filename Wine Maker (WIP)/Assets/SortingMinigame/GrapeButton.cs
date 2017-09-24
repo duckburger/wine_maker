@@ -25,19 +25,7 @@ public class GrapeButton {
 		return valueOfButton;
 	}
 	
-	public GrapeButton()
-	{
-		this.buttonValue = PickItem();
-		
-		if (buttonValue == ButtonValue.Good)
-		{
-			buttonImage = sortingMinigameController.goodGrape;
-		} else if (buttonValue == ButtonValue.Bad)
-		{
-			buttonImage = sortingMinigameController.badGrape;
-
-		}
-	}
+	
 
 
 }

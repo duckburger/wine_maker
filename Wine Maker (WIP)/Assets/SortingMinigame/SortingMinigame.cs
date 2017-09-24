@@ -9,20 +9,13 @@ public class SortingMinigame : MonoBehaviour {
 	
 	[SerializeField] float timeLeftToPlay;
 	[SerializeField] float playTimer;
-	[SerializeField] bool isPlaying = false;
+	public bool isPlaying = false;
 	private Animator animator;
 	private Inventory inventory;
 	private PlayerMovement player;
 	private SortingTable sortingTable;
 
-
-	public List<GrapeButton> grapeButtons = new List<GrapeButton>();
-	public float badGrapesRemoved;
-	public float goodGrapesRemoved;
-	public Sprite goodGrape;
-	public Sprite badGrape;
 	public Transform grapePanel;
-	public GameObject grapeButton;
 	public GameObject sortingSliderGO;
 	public Slider sortingSlider;
 
@@ -39,7 +32,7 @@ public class SortingMinigame : MonoBehaviour {
 		sortingSlider.maxValue = timeLeftToPlay;
 		sortingSlider.value = playTimer;
 		inventory = FindObjectOfType<Inventory>();
-		
+		animator.SetTrigger("isAppearing");
 
 	}
 
@@ -74,21 +67,13 @@ public class SortingMinigame : MonoBehaviour {
 
 	}
 
-	public void StopTheSortingMiniGame()
+	void PopulateTheField()
 	{
 
-		animator.SetTrigger("isAppearing");
-	
-		inventory.AddItem("full_grape_basket_s", 1);
+	}
 
-	
-
-		player.isUsingSomething = false;
-		sortingTable.isBeingUsed = false;
-	
-		goodGrapesRemoved = 0;
-		badGrapesRemoved = 0;
-
+	void StopTheGame()
+	{
 
 	}
 
@@ -97,45 +82,10 @@ public class SortingMinigame : MonoBehaviour {
 
 
 
-	void PopulateTheField ()
-	{
-		player.isUsingSomething = true;
-		grapeButtons = new List<GrapeButton>();
-		GoodOrBadButton[] oldButtons = grapePanel.GetComponentsInChildren<GoodOrBadButton>();
-		for (int j = 0; j < oldButtons.Length; j++)
-		{
-			Destroy(oldButtons[j].gameObject);
-		}
-		for (int i = 0; i < buttonAmount; i++)
-		{ 
-			GrapeButton newGrapeButton = new GrapeButton(); 
-			grapeButtons.Add(new GrapeButton());
-			grapeButtons[i].myID = i;
-			GameObject buttonToAdd = Instantiate(grapeButton, grapePanel);
-			buttonToAdd.GetComponent<GoodOrBadButton>().valueOfThis = newGrapeButton.buttonValue;
-			buttonToAdd.GetComponent<GoodOrBadButton>().buttonID = grapeButtons[i].myID;
-			buttonToAdd.GetComponent<Image>().sprite = newGrapeButton.buttonImage;	
-		}
-	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (isPlaying)
-		{
-			playTimer -= Time.deltaTime;
-			sortingSlider.value = playTimer;
-
-
-		} 
-
-		if (playTimer <= 0)
-		{
-			isPlaying = false;
-			StopTheSortingMiniGame();
-			playTimer = timeLeftToPlay;
-		}
-
 		
 	}
 }
